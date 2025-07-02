@@ -1,11 +1,10 @@
 import { BaseEntityDto } from 'src/common/dto/base-entity.dto';
+import { UserRoleEnum } from 'src/constants/enums/user-role.enum';
 import { TABLE_AUTH } from 'src/constants/table.constant';
 import { Student } from 'src/modules/student/entities/student.entity';
 import { Column, Entity, OneToOne, Relation } from 'typeorm';
 
 export type IAuth = {
-  username: string;
-
   email: string;
 
   password: string;
@@ -13,12 +12,14 @@ export type IAuth = {
   refreshToken: string;
 
   tokenVersion: number;
+
+  roles: Array<UserRoleEnum>;
 };
 
 @Entity(TABLE_AUTH)
 export class Auth extends BaseEntityDto implements IAuth {
-  @Column({ unique: true, nullable: true })
-  username: string;
+  @Column({ enum: UserRoleEnum, type: 'simple-array' })
+  roles: Array<UserRoleEnum>;
 
   @Column({ unique: true, nullable: true })
   email: string;

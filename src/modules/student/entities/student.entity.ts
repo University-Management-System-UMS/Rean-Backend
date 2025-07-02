@@ -31,7 +31,12 @@ export class Student extends BaseEntityDto implements IStudent {
   @Column({ type: String, enum: StudentTitleEnum, nullable: true })
   title: StudentTitleEnum;
 
-  @Column({ type: String, enum: GenderEnum })
+  @Column({
+    type: String,
+    enum: GenderEnum,
+    nullable: true,
+    default: GenderEnum.OTHER,
+  })
   gender: GenderEnum;
 
   @OneToOne(() => Auth)
