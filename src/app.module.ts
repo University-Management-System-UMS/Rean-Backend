@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './config/database/database.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import { AuthModule } from './modules/auth/auth.module';
+import { StudentModule } from './modules/student/student.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
       cache: false,
     }),
     DatabaseModule,
+    AuthModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [
